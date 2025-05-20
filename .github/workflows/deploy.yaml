@@ -1,0 +1,20 @@
+name: CI-CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - uses: streamlit/streamlit-action@v1           # deploy to Streamlit Cloud
+        with:
+          email: ${{ secrets.ST_EMAIL }}
+          password: ${{ secrets.ST_PASSWORD }} 
