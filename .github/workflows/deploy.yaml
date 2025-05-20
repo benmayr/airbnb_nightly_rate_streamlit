@@ -14,7 +14,6 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - run: pytest -q
-      - uses: streamlit/streamlit-action@v1           # deploy to Streamlit Cloud
+      - uses: streamlit/streamlit-action@v1
         with:
-          email: ${{ secrets.ST_EMAIL }}
-          password: ${{ secrets.ST_PASSWORD }} 
+          github_token: ${{ secrets.GITHUB_TOKEN }} 
